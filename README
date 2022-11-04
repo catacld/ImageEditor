@@ -1,0 +1,82 @@
+//313CA Caldaruse Marius-Catalin
+
+
+
+Pentru rezolvarea problemei am folosit headere, astfel functia main 
+nu este foarte lunga.
+
+MAIN:
+
+-Citim din fisier si folosim functia strstr pentru a recunoaste comanda data.
+-De asemenea, tratam si cazurile in care comanda data este invalida si afisam 
+un mesaj corespunzator.
+-Daca a fost introdusa o comanda valida, la final eliberam
+spatiul folosit.
+-Daca nu a fost introdusa nicio comanda valida, afisam
+"Invalid command"
+
+image_transform.h:
+
+-Avem functia "select_all" pentru cazul in care trebuie
+sa selectam toata imaginea.
+-Functiile "MIN" si "MAX" pentru a face minimul, respectiv maximul 
+dintre doua coordonate.
+-Functia select_coords pentru a selecta doar suprafata dintre 
+coordonatele date.
+-Functia "crop", care realizeaza operatia cu aceeasi nume.
+Alocam spatiu pentru o noua matrice in care efectuam 
+operatia, apoi o copiem in vechea matrice, atat in cazul color 
+cat si gray scale.
+La final, retinem noile marimi si afisam un mesaj corespunzator,
+care transmite ca operatia a fost efectuata cu succes.
+
+image_rotate.h:
+
+-Functia "rotate_all" roteste toata poza, folosind o matrice auxiliara unde 
+se efectueaza operatia de rotire,
+aceeasta fiind apoi copiata in vechea matrice si
+retinute noile dimensiuni, similar in cazul in care
+poza este color.
+-Functia "rotate_selected" este similara cu "rotate_all",
+dar efectueaza operatia doar pe o anumita suprafata a pozei.
+-Ambele functii folosesc rotiri repetate de 90 de grade.
+-Functia "rotate" trateaza diverse cazuri:
+Verifica daca avem o imagine incarcata, altfel afiseaza un mesaj corespunzator.
+Verifica daca unghiul este valid (multiplu de 90 de grade),
+altfel afiseaza un mesaj corespunzator.
+In cazul in care unghiul este negativ, este transformat intr-un
+unghi pozitiv.
+Se verifica daca rotirea trebuie aplicata pe intreaga poza sau
+doar pe o anumita portiune.
+De asemenea, daca unghiul este de 360 de grade, efectuarea operatiei de
+rotire nu este necesara.
+
+image_formats.h:
+
+-Aici sunt stocate structurile necesare in rezolvarea programului.
+-Functia "free_content" elibereaza spatiul de memorie alocat, daca este necesar.
+-Functia "load_image" incarca o noua imagine in memorie,
+in functie de parametrii primiti: magic word, format binar/ascii etc. 
+De asemenea, sunt tratate toate cazurile in care ceva nu este in regula 
+(fie fisierul nu exista, fie parametrii introdusi sunt invalizi etc).
+-Functia "save_image" care salveaza imaginea primita ca parametru.
+
+image_filters.h:
+
+-Avem un enum pentru a retine filtrele posibile.
+-Functia "round_r" care rotunjeste, pentru a minimiza erorile.
+-Functia "clamp" in cazul in care valorile obtinute sunt 
+in afara intervalului [0,255].
+-Functia "pixel_filter" care efectueaza calculele necesare 
+pentru aplicarea filtrelor.
+-Functia "calculate_kernel" care calculeaza kernelul 
+in functie de filtrul aplicat.
+-Functia "apply_filter" care aplica filtrul. Intai sunt tratate cazurile 
+invalide:  fie nu avem nicio imagine incarcata, 
+fie imaginea este grayscale, fie parametrul este invalid.
+In cadrul functiei "apply_filter" folosim functia "calculate_kernel" 
+pentru a calcula kernelul in functie de filtrul dat. 
+Alocam o matrice auxiliara unde efectuam operatiile necesare 
+aplicarii filtrului,  aceasta este apoi copiata in matricea originala 
+si spatiul alocat este eliberat.
+
